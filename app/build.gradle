@@ -1,0 +1,41 @@
+apply plugin: 'com.android.application'
+// 添加听云符号表插件
+apply plugin: 'newlens'
+android {
+    compileSdkVersion 24
+    buildToolsVersion "24.0.2"
+    sourceSets {
+        main{
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+    defaultConfig {
+        applicationId "cn.jianke.tingyundemo"
+        minSdkVersion 15
+        targetSdkVersion 24
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:24.2.1'
+    testCompile 'junit:junit:4.12'
+    // 依赖听云
+    compile "com.networkbench.newlens.agent.android:nbs.newlens.agent:2.5.3"
+}
